@@ -5,18 +5,21 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string;
-
-  color: string;
+  shape: string = 'triangle';
 
   lados: number[];
 
-  constructor(color: string, a: number, b: number, c: number) {
-    this.shape = 'triangle';
-    this.color = color;
+  constructor(
+    public color: string,
+    a: number,
+    b: number,
+    c: number,
+  ) {
     this.lados = [a, b, c];
 
-    const sorted = this.lados.sort((numberA, numberB) => numberB - numberA);
+    const sorted = [...this.lados].sort(
+      (numberA, numberB) => numberB - numberA,
+    );
 
     if (this.lados[0] <= 0 || this.lados[1] <= 0 || this.lados[2] <= 0) {
       throw new Error('Error, the side was expected to be greater than zero.');
@@ -43,19 +46,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: string = 'circle';
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Error, the radius is less than or equal to zero');
     }
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -64,23 +63,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: string = 'rectangle';
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
+  constructor(
+    public color: string,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Error, the side was expected to be greater than zero.');
     }
-
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
