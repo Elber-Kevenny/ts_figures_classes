@@ -6,22 +6,21 @@ export interface Figure {
 
 export class Triangle implements Figure {
   shape: string = 'triangle';
-
-  lados: number[];
+  lados: number[]
 
   constructor(
     public color: string,
-    a: number,
-    b: number,
-    c: number,
+    private readonly a: number,
+    private readonly b: number,
+    private readonly c: number,
   ) {
-    this.lados = [a, b, c];
+    this.lados = [this.a, this.b, this.c];
 
     const sorted = [...this.lados].sort(
       (numberA, numberB) => numberB - numberA,
     );
 
-    if (this.lados[0] <= 0 || this.lados[1] <= 0 || this.lados[2] <= 0) {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Error, the side was expected to be greater than zero.');
     } else if (sorted[0] >= sorted[1] + sorted[2]) {
       throw new Error(
@@ -36,9 +35,9 @@ export class Triangle implements Figure {
     const smp = this.lados.reduce((sum, n) => sum + n, 0) / 2; // 6 // 18,5
     const area = Math.sqrt(
       smp *
-        (smp - this.lados[0]) *
-        (smp - this.lados[1]) *
-        (smp - this.lados[2]),
+        (smp - this.a) *
+        (smp - this.b) *
+        (smp - this.c),
     );
 
     return Math.floor(area * 100) / 100;
